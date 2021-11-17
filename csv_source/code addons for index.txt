@@ -1,0 +1,16 @@
+
+from sklearn import preprocessing
+
+#for index
+def ComputeVals(row):
+    return row['violent'] + row['murder']+row['rape'] + row['robbery'] + row['aggrevated_assault'] + row['property']+row['burglary'] + row['vehicle_theft']+row['larceny_theft']
+cacounties['crime rate'] = cacounties.apply(ComputeVals, axis=1)
+df = cacounties[['county_name', 'unemployment_rate', 'median_household_income',
+                 'ave_housingprice', 'grading_score',
+                 'Percentage of good days', 'crime rate']]
+df.set_index('county_name', inplace = True)
+del df.index.name
+scale_df = preprocessing.scale(df)
+scale_df
+file_out1 = 'for index.csv'
+scale_df.to_csv(path + file_out1, index = False)
